@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
@@ -17,45 +17,52 @@ export const BreadcumbBuilder = (props: BreadcumbBuilderProps) => {
   const history = useHistory();
   const [paths, setPaths] = useState<BreadcumbPath[]>([]);
 
-  const buildBreadcumbs = (listener: any) => {
-    const { pathname } = listener;
-    const parts = pathname.split("/");
-    const customPaths: BreadcumbPath[] = [];
+  const buildBreadcumbs = useCallback(
+    (listener: any) => {
+      const { pathname } = listener;
+      const parts = pathname.split("/");
+      const customPaths: BreadcumbPath[] = [];
 
-    for (let index = 0; index < parts.length; index++) {
-      const slice = parts[index];
-      let currentPath;
+      for (let index = 0; index < parts.length; index++) {
+        const slice = parts[index];
+        let currentPath;
 
-      if (index > 0) {
-        currentPath = customPaths[index - 1];
+        if (index > 0) {
+          currentPath = customPaths[index - 1];
+        }
+
+        if (slice !== "" && index > 0) {
+          customPaths.push({
+            name: slice,
+            url: `${currentPath?.url === "/" ? "" : currentPath?.url}/${slice}`,
+          });
+        } else if (slice === basePath) {
+          customPaths.push({
+            name: "Home",
+            url: "/",
+          });
+        } else {
+          customPaths.push({
+            name: "Home",
+            url: "/admin",
+          });
+        }
       }
 
-      if (slice !== "" && index > 0) {
-        customPaths.push({
-          name: slice,
-          url: `${currentPath?.url === "/" ? "" : currentPath?.url}/${slice}`,
-        });
-      } else if (slice === basePath) {
-        customPaths.push({
-          name: "Home",
-          url: "/",
-        });
-      } else {
-        customPaths.push({
-          name: "Home",
-          url: "/admin",
-        });
-      }
-    }
-
-    console.log(customPaths);
-
-    setPaths(customPaths);
-  };
+      setPaths(customPaths);
+    },
+    [basePath]
+  );
 
   useEffect(() => {
-    history.listen((listener) => buildBreadcumbs(listener));
-  }, []);
+    const clearListener = history.listen((listener) =>
+      buildBreadcumbs(listener)
+    );
+
+    return () => {
+      clearListener();
+    };
+  }, [buildBreadcumbs, history]);
 
   return (
     <Breadcrumb>
