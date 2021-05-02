@@ -35,7 +35,7 @@ export const Login = () => {
           alignSelf="flex-start"
           color="blackAlpha.600"
         >
-          See you growth and get consulting support!
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </Heading>
 
         <Grid as="form" gap="1.5em" w="full" pt="10">
