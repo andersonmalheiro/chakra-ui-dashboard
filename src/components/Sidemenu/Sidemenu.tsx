@@ -1,13 +1,13 @@
 import React from 'react';
-import { Box, Flex, HStack, Link, Text, VStack } from '@chakra-ui/react';
+import { Flex, HStack, Link, Text, VStack } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import {
   RiDashboardLine,
   RiHome2Line,
-  RiUserFill,
   RiLogoutCircleLine,
 } from 'react-icons/ri';
 import { IconType } from 'react-icons/lib';
+import { UserInfo } from './UserInfo';
 
 interface SidemenuOption {
   url: string;
@@ -33,36 +33,18 @@ export const Sidemenu = () => {
     <Flex
       as="aside"
       h="full"
-      w="250px"
+      w={{ lg: '250px', sm: '70px', md: '250px' }}
       bg="purple.600"
       direction="column"
       justifyContent="space-between"
-      p={4}
+      p={{ base: 4, sm: 2 }}
     >
-      <VStack direction="column" align="start" spacing={4}>
-        <Box p={2} bg="whiteAlpha.200" rounded="full" w="full">
-          <HStack spacing="1em">
-            <Flex
-              h="40px"
-              w="40px"
-              alignItems="center"
-              justifyContent="center"
-              rounded="full"
-              bg="whiteAlpha.400"
-            >
-              <RiUserFill size="20" color="white" />
-            </Flex>
-            <Flex
-              color="white"
-              flexDirection="column"
-              alignContent="flex-start"
-              textAlign="left"
-            >
-              <Text>John Doe</Text>
-              <Text as="small">johndoe@email.com</Text>
-            </Flex>
-          </HStack>
-        </Box>
+      <VStack
+        direction="column"
+        alignContent={{ base: 'start', sm: 'center', md: 'start' }}
+        spacing={4}
+      >
+        <UserInfo />
 
         <VStack pt="10" w="full">
           {menuOptions.map((option) => {
@@ -77,14 +59,22 @@ export const Sidemenu = () => {
                 w="full"
                 p={2}
                 rounded="full"
+                alignContent={{ sm: 'center' }}
                 _hover={{
                   background: 'whiteAlpha.200',
                 }}
               >
-                <HStack spacing="1em">
+                <HStack
+                  spacing="1em"
+                  justifyContent={{
+                    base: 'unset',
+                    sm: 'center',
+                    md: 'unset',
+                  }}
+                >
                   <Flex
-                    h="40px"
-                    w="40px"
+                    h={{ sm: '35px', md: '40px' }}
+                    w={{ sm: '35px', md: '40px' }}
                     alignItems="center"
                     justifyContent="center"
                     rounded="full"
@@ -92,7 +82,14 @@ export const Sidemenu = () => {
                   >
                     <Icon size="20" />
                   </Flex>
-                  <Text>{name}</Text>
+                  <Text
+                    display={{
+                      sm: 'none',
+                      md: 'block',
+                    }}
+                  >
+                    {name}
+                  </Text>
                 </HStack>
               </Link>
             );
@@ -110,7 +107,7 @@ export const Sidemenu = () => {
           background: 'whiteAlpha.200',
         }}
       >
-        <HStack spacing="1em">
+        <HStack spacing="1em" justifyContent={{ sm: 'center', md: 'unset' }}>
           <Flex
             h="40px"
             w="40px"
@@ -121,7 +118,14 @@ export const Sidemenu = () => {
           >
             <RiLogoutCircleLine size="20" />
           </Flex>
-          <Text>Logout</Text>
+          <Text
+            display={{
+              sm: 'none',
+              md: 'block',
+            }}
+          >
+            Logout
+          </Text>
         </HStack>
       </Link>
     </Flex>
