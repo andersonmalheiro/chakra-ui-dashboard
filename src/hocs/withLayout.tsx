@@ -5,7 +5,7 @@ import { Sidemenu } from "../components/Sidemenu";
 
 export const withLayout = (WrappedComponent: React.FC) => (props: any) => {
   return (
-    <Grid templateColumns="250px auto">
+    <Grid templateColumns={{md: "250px auto", sm: "70px auto"}}>
       <GridItem>
         <Sidemenu />
       </GridItem>
