@@ -1,10 +1,19 @@
 import React from 'react';
-import { Box, Button, Grid, Heading, HStack, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Grid,
+  Heading,
+  HStack,
+  Text,
+  useColorMode,
+} from '@chakra-ui/react';
 import { IndicatorCard } from '../../components/IndicatorCard';
 import { RiEqualizerLine } from 'react-icons/ri';
 
 export const Dashboard = () => {
   document.title = 'Chakra Admin - Dashboard';
+  const { colorMode } = useColorMode();
 
   return (
     <Box
@@ -13,10 +22,15 @@ export const Dashboard = () => {
       overflow="hidden"
       overflowY="auto"
       p={4}
-      bg="gray.100"
+      bg={colorMode === 'dark' ? 'darkMode.background' : 'gray.100'}
     >
       <HStack justifyContent="space-between" mb="20px">
-        <Heading fontSize="xl">Dashboard</Heading>
+        <Heading
+          fontSize="xl"
+          color={colorMode === 'dark' ? 'darkMode.foreground' : 'gray.700'}
+        >
+          Dashboard
+        </Heading>
         <Button size="sm">
           <HStack spacing="5px">
             <RiEqualizerLine size="18" />
@@ -41,7 +55,7 @@ export const Dashboard = () => {
         <Grid gap="4" templateColumns="repeat(auto-fill, minmax(350px, 1fr))">
           <Box
             borderRadius="2xl"
-            bg="white"
+            bg={colorMode === 'dark' ? 'gray.700' : 'white'}
             boxShadow="sm"
             h="full"
             minH="72"
@@ -49,7 +63,7 @@ export const Dashboard = () => {
           ></Box>
           <Box
             borderRadius="2xl"
-            bg="white"
+            bg={colorMode === 'dark' ? 'gray.700' : 'white'}
             boxShadow="sm"
             h="full"
             minH="72"
@@ -57,7 +71,7 @@ export const Dashboard = () => {
           ></Box>
           <Box
             borderRadius="2xl"
-            bg="white"
+            bg={colorMode === 'dark' ? 'gray.700' : 'white'}
             boxShadow="sm"
             h="full"
             minH="72"

@@ -13,8 +13,10 @@ import {
 } from '@chakra-ui/popover';
 import { Portal } from '@chakra-ui/portal';
 import { useMediaQuery } from '@chakra-ui/media-query';
+import { useColorMode } from '@chakra-ui/color-mode';
 
 export const UserInfo = () => {
+  const { colorMode } = useColorMode();
   const [isSmallScreen] = useMediaQuery('(max-width: 768px)');
 
   return (
@@ -46,8 +48,21 @@ export const UserInfo = () => {
               textAlign="left"
               display={{ base: 'block', sm: 'none', md: 'block' }}
             >
-              <Text>John Doe</Text>
-              <Text as="small">johndoe@email.com</Text>
+              <Text
+                color={
+                  colorMode === 'dark' ? 'darkMode.foreground' : 'white'
+                }
+              >
+                John Doe
+              </Text>
+              <Text
+                color={
+                  colorMode === 'dark' ? 'darkMode.foreground' : 'white'
+                }
+                as="small"
+              >
+                johndoe@email.com
+              </Text>
             </Flex>
             {!isSmallScreen && <RiArrowDownSLine size={20} />}
           </HStack>

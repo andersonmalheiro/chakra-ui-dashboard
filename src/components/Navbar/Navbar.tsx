@@ -1,12 +1,14 @@
-import React from "react";
-import { Flex } from "@chakra-ui/react";
-import { ColorModeSwitcher } from "../../ColorModeSwitcher";
-import { BreadcumbBuilder } from "../BreadcumbBuilder/BreadcumbBuilder";
+import React from 'react';
+import { Flex, useColorMode } from '@chakra-ui/react';
+import { ColorModeSwitcher } from '../../ColorModeSwitcher';
+import { BreadcumbBuilder } from '../BreadcumbBuilder/BreadcumbBuilder';
 
 export const Navbar = () => {
+  const { colorMode } = useColorMode();
+
   return (
     <Flex
-      bg="white"
+      bg={colorMode === 'dark' ? 'darkMode.bar' : 'white'}
       w="100%"
       h="50px"
       p={4}

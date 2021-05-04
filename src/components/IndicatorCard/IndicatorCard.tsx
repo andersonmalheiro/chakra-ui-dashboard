@@ -17,7 +17,7 @@ export const IndicatorCard = () => {
     >
       <Flex justifyContent="space-between">
         <Box
-          bg={colorMode === 'dark' ? 'white' : 'gray.700'}
+          bg={colorMode === 'dark' ? 'whiteAlpha.400' : 'gray.700'}
           h="40px"
           w="40px"
           borderRadius="full"
@@ -30,7 +30,7 @@ export const IndicatorCard = () => {
             h="full"
           >
             <RiBitCoinFill
-              color={colorMode === 'dark' ? '#2d3748' : 'white'}
+              color={colorMode === 'dark' ? '#a9b1d6' : 'white'}
               size={30}
             />
           </Flex>
@@ -39,8 +39,18 @@ export const IndicatorCard = () => {
         <RiMore2Fill size={20} />
       </Flex>
       <VStack alignItems="flex-start" spacing="sm" mt="10px">
-        <Heading fontSize="lg">Value</Heading>
-        <Text fontSize="sm">Primary text</Text>
+        <Heading
+          fontSize="lg"
+          color={colorMode === 'dark' ? 'darkMode.foreground' : 'gray.700'}
+        >
+          Value
+        </Heading>
+        <Text
+          fontSize="sm"
+          color={colorMode === 'dark' ? 'darkMode.foreground' : 'gray.700'}
+        >
+          Primary text
+        </Text>
       </VStack>
     </Box>
   );

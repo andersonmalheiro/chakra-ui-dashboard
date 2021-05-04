@@ -1,5 +1,12 @@
 import React from 'react';
-import { Flex, HStack, Link, Text, VStack } from '@chakra-ui/react';
+import {
+  Flex,
+  HStack,
+  Link,
+  Text,
+  useColorMode,
+  VStack,
+} from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import {
   RiDashboardLine,
@@ -16,6 +23,8 @@ interface SidemenuOption {
 }
 
 export const Sidemenu = () => {
+  const { colorMode } = useColorMode();
+
   const menuOptions: SidemenuOption[] = [
     {
       icon: RiHome2Line,
@@ -34,7 +43,7 @@ export const Sidemenu = () => {
       as="aside"
       h="full"
       w={{ lg: '250px', sm: '70px', md: '250px' }}
-      bg="purple.600"
+      bg={colorMode === 'dark' ? 'darkMode.bar' : 'purple.600'}
       direction="column"
       justifyContent="space-between"
       p={{ base: 4, sm: 2 }}
@@ -80,9 +89,15 @@ export const Sidemenu = () => {
                     rounded="full"
                     bg="whiteAlpha.400"
                   >
-                    <Icon size="20" />
+                    <Icon
+                      size="20"
+                      color={colorMode === 'dark' ? '#a9b1d6' : 'white'}
+                    />
                   </Flex>
                   <Text
+                    color={
+                      colorMode === 'dark' ? 'darkMode.foreground' : 'white'
+                    }
                     display={{
                       sm: 'none',
                       md: 'block',
@@ -116,13 +131,17 @@ export const Sidemenu = () => {
             rounded="full"
             bg="whiteAlpha.400"
           >
-            <RiLogoutCircleLine size="20" />
+            <RiLogoutCircleLine
+              size="20"
+              color={colorMode === 'dark' ? '#a9b1d6' : 'white'}
+            />
           </Flex>
           <Text
             display={{
               sm: 'none',
               md: 'block',
             }}
+            color={colorMode === 'dark' ? 'darkMode.foreground' : 'white'}
           >
             Logout
           </Text>

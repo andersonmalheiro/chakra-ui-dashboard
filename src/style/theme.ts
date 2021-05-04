@@ -9,6 +9,13 @@ export const theme = extendTheme(
     components: {
       FormControl: {},
     },
+    colors: {
+      darkMode: {
+        foreground: '#a9b1d6',
+        background: '#24283b',
+        bar: '#1f2335',
+      }
+    }
   },
   withDefaultProps({
     defaultProps: {
@@ -19,5 +26,5 @@ export const theme = extendTheme(
   withDefaultColorScheme({
     colorScheme: "purple",
     components: ["Button", "FormControl", "Input", "Checkbox", "Select"],
-  })
+  }),
 );
